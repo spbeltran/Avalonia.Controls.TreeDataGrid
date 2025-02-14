@@ -201,21 +201,21 @@ namespace Avalonia.Controls
             return GetModelChildren((TModel)model);
         }
 
-        public bool SortBy(IColumn? column, ListSortDirection direction)
+        public bool SortBy(IColumn? column, ListSortDirection? direction)
         {
-            if (column is IColumn<TModel> columnBase &&
-                Columns.Contains(columnBase) &&
-                columnBase.GetComparison(direction) is Comparison<TModel> comparison)
-            {
-                Sort(comparison);
-                Sorted?.Invoke();
-                foreach (var c in Columns)
-                    c.SortDirection = c == column ? (ListSortDirection?)direction : null;
-                return true;
-            }
+            if (column is not IColumn<TModel> columnBase ||
+                !Columns.Contains(columnBase)) return false;
 
-            return false;
+            Comparison<TModel>? comparison = null;
+            if (direction != null) comparison = columnBase.GetComparison(direction.Value);
+            Sort(comparison);
+            Sorted?.Invoke();
+            foreach (var c in Columns)
+                c.SortDirection = c == column ? direction : null;
+            return true;
         }
+
+        void ITreeDataGridSource.ClearSort() => Sort(null);
 
         void ITreeDataGridSource.DragDropRows(
             ITreeDataGridSource source,

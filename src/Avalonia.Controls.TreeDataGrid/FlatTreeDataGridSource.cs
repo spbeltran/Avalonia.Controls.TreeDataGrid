@@ -135,14 +135,14 @@ namespace Avalonia.Controls
             }
         }
 
-        bool ITreeDataGridSource.SortBy(IColumn? column, ListSortDirection direction)
+        bool ITreeDataGridSource.SortBy(IColumn? column, ListSortDirection? direction)
         {
             if (column is IColumn<TModel> typedColumn)
             {
                 if (!Columns.Contains(typedColumn))
                     return true;
 
-                var comparer = typedColumn.GetComparison(direction);
+                var comparer = direction != null ? typedColumn.GetComparison(direction.Value) : null;
 
                 if (comparer is not null)
                 {
@@ -157,6 +157,8 @@ namespace Avalonia.Controls
 
             return false;
         }
+
+        void ITreeDataGridSource.ClearSort() => _rows?.Sort(null);
 
         IEnumerable<object> ITreeDataGridSource.GetModelChildren(object model)
         {

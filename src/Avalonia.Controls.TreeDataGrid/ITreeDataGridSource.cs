@@ -75,7 +75,12 @@ namespace Avalonia.Controls
         /// <param name="column">The column.</param>
         /// <param name="direction">The sort direction.</param>
         /// <returns>True if the sort could be performed; otherwise false.</returns>
-        bool SortBy(IColumn column, ListSortDirection direction);
+        bool SortBy(IColumn column, ListSortDirection? direction);
+
+        /// <summary>
+        /// Clears the current sort.
+        /// </summary>
+        public void ClearSort();
     }
 
     /// <summary>

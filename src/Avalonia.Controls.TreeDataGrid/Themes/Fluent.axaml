@@ -1,7 +1,7 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-  <StyleInclude Source="/Themes/Generic.axaml" />
+  <StyleInclude Source="/Utils/Libs/Avalonia.Controls.TreeDataGrid/src/Avalonia.Controls.TreeDataGrid/Themes/Generic.axaml" />
   
   <Styles.Resources>
     <ResourceDictionary>

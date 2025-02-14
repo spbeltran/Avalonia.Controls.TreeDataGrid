@@ -82,7 +82,7 @@ namespace Avalonia.Controls
         private IScrollable? _headerScroll;
         private ITreeDataGridSelectionInteraction? _selection;
         private Control? _userSortColumn;
-        private ListSortDirection _userSortDirection;
+        private ListSortDirection? _userSortDirection;
         private TreeDataGridCellEventArgs? _cellArgs;
         private TreeDataGridRowEventArgs? _rowArgs;
         private Canvas? _dragAdorner;
@@ -491,8 +491,18 @@ namespace Avalonia.Controls
                 }
                 else
                 {
-                    _userSortDirection = _userSortDirection == ListSortDirection.Ascending ?
-                        ListSortDirection.Descending : ListSortDirection.Ascending;
+                    switch (_userSortDirection)
+                    {
+                        case ListSortDirection.Ascending:
+                            _userSortDirection = ListSortDirection.Descending;
+                            break;
+                        case ListSortDirection.Descending:
+                            _userSortDirection = null;
+                            break;
+                        default:
+                            _userSortDirection = ListSortDirection.Ascending;
+                            break;
+                    }
                 }
 
                 var column = _source.Columns[columnHeader.ColumnIndex];
