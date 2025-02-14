@@ -491,6 +491,7 @@ namespace Avalonia.Controls
                 }
                 else
                 {
+                    // Change
                     switch (_userSortDirection)
                     {
                         case ListSortDirection.Ascending:
