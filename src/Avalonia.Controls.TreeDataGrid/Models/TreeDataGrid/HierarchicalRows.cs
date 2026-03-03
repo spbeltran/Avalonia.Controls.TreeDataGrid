@@ -428,6 +428,7 @@ namespace Avalonia.Controls.Models.TreeDataGrid
                         var count = GetDescendentRowCount(parentRowIndex);
                         Remove(parentRowIndex + 1, count, true);
                         Add(parentRowIndex + 1, children, true);
+                        //Add(parentRowIndex + 1, children, false); // Fixes issue #359. Children are already added via their own events.
                     }
                     break;
                 default:
